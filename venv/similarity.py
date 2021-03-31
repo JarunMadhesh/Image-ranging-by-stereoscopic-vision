@@ -11,10 +11,12 @@ def similarity(img1, img2):
     kp_a, desc_a = orb.detectAndCompute(img1, None)
     kp_b, desc_b = orb.detectAndCompute(img2, None)
 
-    #### Plotting the detected features
+    ### Plotting the detected features
     # for i in kp_a:
     #     point = tuple(np.array(i.pt).astype(int))
     #     img1 = cv2.circle(img1, point, color=(255, 0, 0), thickness=2, radius=1)
+    # cv2.imshow("LEft", img1)
+    # cv2.waitKey(0)
 
     #### Bruteforce matching
     bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
@@ -25,6 +27,7 @@ def similarity(img1, img2):
         if abs(kp_a[match.queryIdx].pt[1] - kp_b[match.trainIdx].pt[1]) < 3:
             matches.append((match))            #Incase we output the image with similarities
             matched_points.append([kp_a[match.queryIdx].pt, kp_b[match.trainIdx].pt])
+            img1 = cv2.circle(img1, tuple(np.array(kp_a[match.queryIdx].pt).astype(int)), color=(255, 0, 0), thickness=2, radius=1)
     print("Match by bf: ", len(matched_points))
 
     # result = cv2.drawMatches(img1, kp_a, img2, kp_b, matches, None)
@@ -32,6 +35,7 @@ def similarity(img1, img2):
     # cv2.imshow("left", img1)
     # cv2.imshow("right", img2)
     # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
     return matched_points
 

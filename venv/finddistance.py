@@ -14,18 +14,25 @@ def findDistofPix(x, y, dist_image):
     i = 1
     dist_image = dist_image.astype(int)
     while True:
-        if np.count_nonzero(dist_image[x-i:x+i,y-i:y+i]) > 3:
+        if np.count_nonzero(dist_image[x-i:x+i,y-i:y+i]) > 5:
             break
         i+=1
+        if i>min(np.shape(dist_image)[0], np.shape(dist_image)[1]):
+            break
     lt = []
     pt = dist_image[x - i:x + i, y - i:y + i]
-    for i in pt:
-        for j in i:
+    for p in pt:
+        for j in p:
             if(j!=0):
                 lt.append(j)
-    lt.pop(lt.index(max(lt)))
-    lt.pop((lt.index(min(lt))))
-    distance = np.mean(lt)
+    print("lt = ", lt)
+    if len(lt)>3:
+        lt.pop(lt.index(max(lt)))
+        lt.pop((lt.index(min(lt))))
+    if len(lt)>0:
+        distance = np.mean(lt)
+    else:
+        distance = -1
     return distance
 
 
