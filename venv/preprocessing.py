@@ -19,8 +19,8 @@ def camera_sees():
     left = cv2.resize(left, (0, 0), fx=change, fy=change)
     right = cv2.resize(right, (0, 0), fx=change, fy=change)
 
-    left = cv2.blur(left, (2, 2))
-    right = cv2.blur(right, (2, 2))
+    left = cv2.blur(left, (3, 3))
+    right = cv2.blur(right, (3, 3))
 
     left = cv2.cvtColor(left, cv2.COLOR_BGR2GRAY)
     right = cv2.cvtColor(right, cv2.COLOR_BGR2GRAY)
@@ -29,7 +29,7 @@ def camera_sees():
     right[0:np.shape(right)[0], int(np.shape(right)[1] * 0.9): np.shape(right)[1]] = 0
 
     kernel = np.array([[-1,-1,-1],
-                       [-1, 9.5,-1],
+                       [-1, 9,-1],
                        [-1,-1,-1]])
     left = cv2.filter2D(left, -1, kernel)
     right = cv2.filter2D(right, -1, kernel)
