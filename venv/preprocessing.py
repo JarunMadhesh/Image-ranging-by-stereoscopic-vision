@@ -3,8 +3,8 @@ import numpy as np
 
 def camera_sees():
 
-    path1 = r"C:\Users\DELL\PycharmProjects\research\venv\1.jpg"
-    path2 = r"C:\Users\DELL\PycharmProjects\research\venv\2.jpg"
+    path1 = r"C:\Users\DELL\PycharmProjects\research\venv\11.jpg"
+    path2 = r"C:\Users\DELL\PycharmProjects\research\venv\22.jpg"
 
     # path = r"C:\Users\DELL\PycharmProjects\research\venv\img.jpeg"
     #
@@ -34,5 +34,6 @@ def camera_sees():
                        [-1,-1,-1]])
     left = cv2.filter2D(left, -1, kernel)
     right = cv2.filter2D(right, -1, kernel)
+
 
     return left, right

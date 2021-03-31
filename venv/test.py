@@ -61,6 +61,7 @@ if __name__ == "__main__" :
     # chumma([left, right])
     matched_points = similarity(left, right)
     pix_with_dist, dist_image = findDistance(matched_points, np.shape(left), distance_btw_eyes, angle_of_view)
+
     print(time.time() - start)
     Window(left, dist_image)
     # plotDist(pix_with_dist)

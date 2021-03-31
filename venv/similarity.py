@@ -3,6 +3,7 @@ import  math
 import cv2
 import numpy as np
 from PIL import Image as im
+from convexhull import *
 
 
 def similarity(img1, img2):
@@ -23,12 +24,20 @@ def similarity(img1, img2):
     allMatches = bf.match(desc_a, desc_b)
     matches = []
     matched_points = []
+    left_matches = []
     for match in allMatches:
         if abs(kp_a[match.queryIdx].pt[1] - kp_b[match.trainIdx].pt[1]) < 3:
             matches.append((match))            #Incase we output the image with similarities
             matched_points.append([kp_a[match.queryIdx].pt, kp_b[match.trainIdx].pt])
+            left_matches.append(tuple(np.array(kp_a[match.queryIdx].pt).astype(int)))
             img1 = cv2.circle(img1, tuple(np.array(kp_a[match.queryIdx].pt).astype(int)), color=(255, 0, 0), thickness=2, radius=1)
     print("Match by bf: ", len(matched_points))
+
+    # hull = convexHull(left_matches, len(left_matches))
+
+    # for i in hull:
+    #     cv2.circle(img1, i, radius= 5, color = (0, 0, 0), thickness= 4)
+
 
     # result = cv2.drawMatches(img1, kp_a, img2, kp_b, matches, None)
     # cv2.imshow("bf", result)
