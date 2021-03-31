@@ -37,7 +37,8 @@ class Window():
         temp_dist = findDistofPix(self.w1.get(), self.w2.get(), self.dist_img)
         print(temp_dist)
 
-        self.editedimg = cv2.circle(self.editedimg, (self.w2.get(), self.w1.get()), radius=5, color=(0, 0, 0), thickness=2)
+        self.editedimg = cv2.circle(self.editedimg, (self.w2.get(), self.w1.get()), radius=5, color=(0, 15, 0), thickness=2)
+        self.editedimg = cv2.putText(self.editedimg, str(round(temp_dist, 2)), (self.w2.get()+70, self.w1.get()),  cv2.FONT_HERSHEY_SIMPLEX, 0.4,(15, 0, 0), 1, cv2.LINE_AA, False)
         self.photo = ImageTk.PhotoImage(im.fromarray(self.editedimg))
         self.canvas.create_image(0, 0, anchor=NW, image=self.photo)
         self.root.update()

@@ -26,7 +26,7 @@ def similarity(img1, img2):
     matched_points = []
     left_matches = []
     for match in allMatches:
-        if abs(kp_a[match.queryIdx].pt[1] - kp_b[match.trainIdx].pt[1]) < 3:
+        if abs(kp_a[match.queryIdx].pt[1] - kp_b[match.trainIdx].pt[1]) < 10:
             matches.append((match))            #Incase we output the image with similarities
             matched_points.append([kp_a[match.queryIdx].pt, kp_b[match.trainIdx].pt])
             left_matches.append(tuple(np.array(kp_a[match.queryIdx].pt).astype(int)))
@@ -39,11 +39,11 @@ def similarity(img1, img2):
     #     cv2.circle(img1, i, radius= 5, color = (0, 0, 0), thickness= 4)
 
 
-    # result = cv2.drawMatches(img1, kp_a, img2, kp_b, matches, None)
-    # cv2.imshow("bf", result)
-    # cv2.imshow("left", img1)
-    # cv2.imshow("right", img2)
-    # cv2.waitKey(0)
+    result = cv2.drawMatches(img1, kp_a, img2, kp_b, matches, None)
+    cv2.imshow("bf", result)
+    cv2.imshow("left", img1)
+    cv2.imshow("right", img2)
+    cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
     return matched_points

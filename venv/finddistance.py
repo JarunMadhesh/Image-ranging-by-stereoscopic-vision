@@ -55,15 +55,15 @@ def findDistance(matched_points, imgShape, base, view):
         pix_with_dist.append([leftObj[0], leftObj[1], distance])
         dist_img[int(leftObj[1])][int(leftObj[0])] = int(distance)
 
-    left_match = []
-    for i in matched_points:
-        left_match.append(i[0])
-    hull = convexHull(left_match, len(left_match))
-
-    for i in range(np.shape(dist_img)[0]):
-        for j in range(np.shape(dist_img)[1]):
-            if(is_inside_polygon(hull, (i,j))):
-                dist_img[i][j] = dist_img[int(hull[0][1])][int(hull[0][0])]
+    # left_match = []
+    # for i in matched_points:
+    #     left_match.append(i[0])
+    # hull = convexHull(left_match, len(left_match))
+    #
+    # for i in range(np.shape(dist_img)[0]):
+    #     for j in range(np.shape(dist_img)[1]):
+    #         if(is_inside_polygon(hull, (i,j))):
+    #             dist_img[i][j] = dist_img[int(hull[0][1])][int(hull[0][0])]
 
     return pix_with_dist, dist_img
 
